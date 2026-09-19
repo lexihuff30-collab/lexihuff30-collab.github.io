@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lexihuff30-collab.github.io/sitemap.xml

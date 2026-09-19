@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paycheck Budget Calculator, Alexis Huffman</title>
+<meta name="description" content="A simple, free paycheck budget calculator for teens. Type in what you got paid and see how to split it between checking, a high-yield savings account, goals, investing, and giving.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Paycheck Budget Calculator, Alexis Huffman">
+<meta property="og:description" content="Just got paid? Type in the amount and see a simple way to split it into buckets. Made for teens who don't know where to start.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23211e1b%22/><text x=%2250%22 y=%2268%22 font-size=%2260%22 font-family=%22Georgia,serif%22 fill=%22%23f6f1e9%22 text-anchor=%22middle%22>A</text></svg>">
+<link rel="canonical" href="https://lexihuff30-collab.github.io/budget.html">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-nav" id="siteNav">
+  <a href="index.html" class="site-nav__mark" aria-label="Alexis Huffman, home">Lexi H.</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="site-nav__links" id="navLinks" aria-label="Primary">
+    <a href="index.html#story">Story</a>
+    <a href="index.html#interests">Interests</a>
+    <a href="index.html#experience">Experience</a>
+    <a href="index.html#beyond">Beyond</a>
+    <a href="resume.html">Resume</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="main">
+  <div class="container page-header">
+    <p class="eyebrow page-header__eyebrow">A free tool</p>
+    <h1>Just got paid? Start here.</h1>
+    <p class="page-header__sub">Your first paychecks are exciting, and confusing, because nobody really explains what to do with the money. This calculator splits any paycheck into five simple buckets and explains each one in plain English. It's a starting point, not a set of rules.</p>
+    <p class="budget__disclaimer">I'm a student, not a licensed financial professional. This is general education, not financial, tax, or legal advice, so talk it through with a parent or someone you trust.</p>
+  </div>
+
+  <div class="container budget" style="padding-bottom: var(--section-pad);">
+
+    <aside class="essay-callout budget__why reveal">
+      <p class="essay-callout__label">Why bother with a budget?</p>
+      <p>Only 63 percent of U.S. adults said they could cover a surprise $400 expense using just cash, savings, or a credit card paid off at the next statement.<sup><a href="#budgetSource">1</a></sup> Having a plan for every paycheck, including a bucket for emergencies, is one way to end up in that group instead of scrambling when something breaks.</p>
+    </aside>
+
+    <aside class="essay-callout budget__why reveal">
+      <p class="essay-callout__label">Debt is common, and a budget helps</p>
+      <p>In the same survey, 45 percent of credit card owners said they carried a balance at least once in the past 12 months, and 16 percent of all adults had outstanding student loans.<sup><a href="#budgetSource">2</a></sup> A budget can't erase debt, but it helps you avoid the most common ways people fall into it: spending more than they bring in, putting surprise expenses on a credit card that charges high interest, and borrowing for things they could have saved for. Your emergency bucket covers the surprises, your Goals bucket lets you save up instead of borrow, and seeing where your money goes catches small leaks before they turn into a balance.</p>
+    </aside>
+
+    <section class="budget__steps reveal" aria-labelledby="stepsTitle">
+      <h2 class="budget__steps-title" id="stepsTitle">What to do after you get paid</h2>
+      <ol class="budget__steps-list">
+        <li><b>Check your take-home.</b> Look at what actually landed in your account after taxes, plus any tips, and type it in below. If nobody takes taxes out of your pay (cash tips, dog sitting, other gigs), set some aside for taxes and ask a parent or tax professional how much.</li>
+        <li><b>Move the money the same day.</b> Leave the Checking amount where it is. Transfer the HYSA and Goals amounts into their savings accounts. Set the Investing and Give amounts aside too. If you haven't opened an investing account yet, park that money in your HYSA until you do.</li>
+        <li><b>Automate it.</b> Most banks let you schedule repeating transfers, so the saving happens without you having to remember.</li>
+        <li><b>Check in once a week.</b> Five minutes to see what's left in Checking is enough. If money is tight, start with just Checking and your emergency fund, and add the other buckets when you can.</li>
+      </ol>
+    </section>
+
+    <form class="budget__form reveal" id="budgetForm" novalidate>
+      <label class="budget__label" for="paycheck">How much did you get paid?</label>
+      <div class="budget__field">
+        <span class="budget__currency" aria-hidden="true">$</span>
+        <input id="paycheck" name="paycheck" type="text" inputmode="decimal" autocomplete="off" placeholder="0.00" aria-describedby="paycheckHelp">
+      </div>
+      <p class="budget__help" id="paycheckHelp">Use the amount you actually take home, including tips. Do this every time you get paid.</p>
+    </form>
+
+    <div class="budget__results reveal">
+      <p class="budget__total" id="budgetTotal" aria-live="polite">Enter an amount to see your buckets.</p>
+      <div class="budget__bar" id="budgetBar" role="img" aria-label="Bar showing how the paycheck is split across five buckets"></div>
+
+      <ol class="bucket-list">
+        <li class="bucket" data-pct="40" style="--c:#b1502e">
+          <div class="bucket__top">
+            <h2 class="bucket__name"><span class="bucket__dot" aria-hidden="true"></span>Checking</h2>
+            <span class="bucket__pct"></span>
+            <span class="bucket__amt">$0.00</span>
+          </div>
+          <p class="bucket__tag">Everyday spending</p>
+          <p class="bucket__desc">This is the account your debit card is tied to. It's for what you'll spend in the next couple of weeks, like gas, food, and hanging out with friends. Keep a small cushion so you never overdraw, since overdraft fees add up, but don't leave much extra here, because it isn't growing. If you're under 18, you'll usually open this account with a parent.</p>
+        </li>
+
+        <li class="bucket" data-pct="20" style="--c:#6e7660">
+          <div class="bucket__top">
+            <h2 class="bucket__name"><span class="bucket__dot" aria-hidden="true"></span>High-yield savings (HYSA)</h2>
+            <span class="bucket__pct"></span>
+            <span class="bucket__amt">$0.00</span>
+          </div>
+          <p class="bucket__tag">Emergency fund</p>
+          <p class="bucket__desc">A high-yield savings account is a savings account, usually from an online bank, that pays a lot more interest than a regular one. Rates can change over time. Look for one at an FDIC-insured bank (or an NCUA-insured credit union), which protects your money up to $250,000 per bank. This is your safety net for surprises like a flat tire, a cracked phone, or a missed shift. A good first goal is $500 to $1,000, and later you can grow it toward a few months of expenses. If you're under 18, you'll usually open it with a parent.</p>
+        </li>
+
+        <li class="bucket" data-pct="15" style="--c:#c9a24a">
+          <div class="bucket__top">
+            <h2 class="bucket__name"><span class="bucket__dot" aria-hidden="true"></span>Goals</h2>
+            <span class="bucket__pct"></span>
+            <span class="bucket__amt">$0.00</span>
+          </div>
+          <p class="bucket__tag">Saving for something specific</p>
+          <p class="bucket__desc">Money for something you plan to buy in the next one to five years, like a car, a laptop, a trip, or college costs. Because you'll need it soon, keep it in a savings account, not the stock market, which can drop right when you need the money. Keep it separate from your emergency fund so you don't spend one on the other. A second savings account works, and many banks let you name them.</p>
+        </li>
+
+        <li class="bucket" data-pct="15" style="--c:#8a5a6b">
+          <div class="bucket__top">
+            <h2 class="bucket__name"><span class="bucket__dot" aria-hidden="true"></span>Investing</h2>
+            <span class="bucket__pct"></span>
+            <span class="bucket__amt">$0.00</span>
+          </div>
+          <p class="bucket__tag">Future you</p>
+          <p class="bucket__desc">Money you won't touch for 10 years or more. A Roth IRA is a retirement account, so it's meant to stay put until you're older. If you have earned income, like wages from a job or self-employment income you report, a custodial Roth IRA is one option for teens: an adult opens and manages it for you until you're an adult (18 in most states, 19 or 21 in a few). Your money can grow and later be withdrawn tax-free in retirement, under IRS rules, but taking out the growth early usually means taxes and a penalty. Investments go up and down and you can lose money, so only invest money you won't need soon, and ask a trusted adult to help you get started.</p>
+          <p class="bucket__where"><b>Well-known places to open one:</b> <a href="https://investor.vanguard.com/accounts-plans/iras/custodial-ira" target="_blank" rel="noopener">Vanguard</a> (the one I use), <a href="https://www.fidelity.com/learning-center/personal-finance/retirement/turbocharge-childs-retirement" target="_blank" rel="noopener">Fidelity</a>, and <a href="https://www.schwab.com/learn/story/roth-ira-for-kids" target="_blank" rel="noopener">Charles Schwab</a>. All three offer custodial Roth IRAs. The most you can put in is the smaller of what you earned that year or the yearly IRS limit. Fees and investment choices differ, so compare them and ask an adult before you open anything. These are examples, not recommendations.</p>
+        </li>
+
+        <li class="bucket" data-pct="10" style="--c:#a89376">
+          <div class="bucket__top">
+            <h2 class="bucket__name"><span class="bucket__dot" aria-hidden="true"></span>Give</h2>
+            <span class="bucket__pct"></span>
+            <span class="bucket__amt">$0.00</span>
+          </div>
+          <p class="bucket__tag">Giving &amp; gifts</p>
+          <p class="bucket__desc">Donations, birthday presents, tithing, helping a friend out. Giving is optional, so change this bucket to fit your values and your budget. Setting a little aside ahead of time makes giving feel good instead of stressful.</p>
+        </li>
+      </ol>
+
+      <p class="budget__note">This is a starting point, so over time, when you learn more, you may make your financial organization more complex. The percentages aren't rules, so change them as your life changes. Everyone's situation is different, so use this as a way to start the conversation with a parent or someone you trust.</p>
+    </div>
+
+    <section class="budget__rebuttal reveal" aria-labelledby="rebuttalTitle">
+      <h2 id="rebuttalTitle">"But I'm not even paying bills yet."</h2>
+      <p class="budget__rebuttal-lead">Good. That's the best time to start.</p>
+
+      <div class="rebuttal">
+        <h3>The stakes are low, so it's real practice.</h3>
+        <p>Right now a mistake costs you a night out, not your rent. If you learn to split a paycheck now, you'll have made your beginner mistakes before they get expensive.</p>
+      </div>
+
+      <div class="rebuttal">
+        <h3>A system makes the transition easier.</h3>
+        <p>When the first real bills show up, like a phone plan, car insurance, or rent, you won't have to invent a plan from scratch. You'll already split every paycheck, so you just add a Bills bucket and shrink the others.</p>
+      </div>
+
+      <div class="rebuttal">
+        <h3>Time does the heavy lifting.</h3>
+        <p>Compound interest is interest you earn on your interest.<sup><a href="#budgetSource">3</a></sup> The earlier money goes in, the longer it has to grow on itself. Here's a made-up example: $50 a month at a 7 percent average yearly return, until age 65.</p>
+
+        <div class="compound" role="group" aria-label="Example of starting to invest at 16 versus 26">
+          <div class="compound__row">
+            <div class="compound__head"><b>Start at 16</b><span>puts in $29,400</span></div>
+            <div class="compound__track"><span class="compound__bar" style="width:100%"></span></div>
+            <p class="compound__amt">about $253,000</p>
+          </div>
+          <div class="compound__row">
+            <div class="compound__head"><b>Start at 26</b><span>puts in $23,400</span></div>
+            <div class="compound__track"><span class="compound__bar compound__bar--late" style="width:48%"></span></div>
+            <p class="compound__amt">about $122,000</p>
+          </div>
+        </div>
+
+        <p>Starting 10 years earlier meant putting in only $6,000 more, and ending up with about $131,000 more. The 7 percent is an assumption for illustration, not a promise or a prediction. There is no guaranteed return: the stock market goes up and down, you can lose money, and this example ignores taxes, fees, and inflation.</p>
+      </div>
+    </section>
+
+    <ol class="budget__sources reveal" id="budgetSource">
+      <li>Board of Governors of the Federal Reserve System, <a href="https://www.federalreserve.gov/publications/2026-economic-well-being-of-us-households-in-2025-savings-investments.htm" target="_blank" rel="noopener">Economic Well-Being of U.S. Households in 2025</a> (May 2026), Savings and Investments.</li>
+      <li>Board of Governors of the Federal Reserve System, <a href="https://www.federalreserve.gov/publications/2026-economic-well-being-of-us-households-in-2025-credit.htm" target="_blank" rel="noopener">Economic Well-Being of U.S. Households in 2025</a> (May 2026), Credit.</li>
+      <li>U.S. Securities and Exchange Commission, <a href="https://www.sec.gov/investor/students/tips.htm" target="_blank" rel="noopener">Tips for Teaching Students About Saving and Investing</a>. The 7 percent example was calculated by me using the standard future-value formula with monthly deposits.</li>
+    </ol>
+
+    <div class="page-header__actions reveal">
+      <a href="projects.html" class="btn">← Goals &amp; projects</a>
+      <a href="index.html#contact" class="btn btn--rust">Tell me what would help →</a>
+    </div>
+
+    <p class="budget__contact reveal">Questions? Do not hesitate to reach out at <a href="mailto:lexi.huff30@gmail.com">lexi.huff30@gmail.com</a>.</p>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <span>© <span id="year"></span> Alexis Huffman</span>
+  <span>Downingtown, Pennsylvania</span>
+</footer>
+
+<script src="script.js"></script>
+<script src="budget.js"></script>
+</body>
+</html>
